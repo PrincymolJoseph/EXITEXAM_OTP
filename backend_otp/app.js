@@ -1,0 +1,38 @@
+const express = require('express')
+const app = new express()
+const morgan = require('morgan')
+const cors = require('cors')
+const path = require('path')
+app.use(morgan('dev'))
+require('dotenv').config()
+require('./db/dbConnect')
+
+// const jwt = require('jsonwebtoken')
+// const userData = require('./model/userData')
+// const adminData = require('./model/adminData')
+// const employeeData = require('./model/employeeData')
+
+// const loginRoutes = require('./routes/loginRoutes')
+// const userRoutes = require('./routes/userRoutes')
+// const employeeRoutes = require('./routes/employeeRoutes')
+
+app.use(cors())
+// app.use(cors({
+//     origin: ['https://ict-employee-app-client.vercel.app/'],
+//     credentials:true,
+//     methods:['POST','GET']
+//   }));
+
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
+const otpRoutes = require('./routes/otpRoutes')
+
+app.use('/api',otpRoutes)
+
+// app.use(express.static(path.join(__dirname, 'dist')));
+// app.get('/*',function(req,res){res.sendFile(path.join(__dirname,'/dist/index.html'))})
+
+app.listen(process.env.PORT,()=>{
+    console.log(`Server is listening on PORT ${process.env.PORT}:`)
+})
