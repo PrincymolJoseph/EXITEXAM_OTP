@@ -30,8 +30,8 @@ const otpRoutes = require('./routes/otpRoutes')
 
 app.use('/api',otpRoutes)
 
-// app.use(express.static(path.join(__dirname, 'dist')));
-// app.get('/*',function(req,res){res.sendFile(path.join(__dirname,'/dist/index.html'))})
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('/*',function(req,res){res.sendFile(path.join(__dirname,'/dist/index.html'))})
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server is listening on PORT ${process.env.PORT}:`)
